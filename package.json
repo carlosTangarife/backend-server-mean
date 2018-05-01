@@ -16,6 +16,7 @@
   "author": "carlos tangarife",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "mongoose": "^5.0.17"
   },
