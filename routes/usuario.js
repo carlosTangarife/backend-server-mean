@@ -1,27 +1,26 @@
 // Requires
-var express = require('express');
+var express = require("express");
 
 // inicializar variables
 var app = express();
 
-var Usaurio = require('../models/usuario')
+var Usaurio = require("../models/usuario");
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
+  Usaurio.find({}, "nombre email img role").exec((err, usuarios) => {
+    if (err) {
+      return err.status(500).json({
+        ok: false,
+        mensaje: "Error cargando usuario",
+        error: err
+      });
+    }
 
-    Usaurio.find({}, (err, usuarios)=> {
-        if(err) {
-            return err.status(500).json({
-                ok: false,
-                mensaje: 'Error cargando usuario',
-                error: err
-            })
-        } 
-
-        res.status(200).json({
-            ok: true,
-            usuarios: usuarios
-        })
+    res.status(200).json({
+      ok: true,
+      usuarios: usuarios
     });
+  });
 });
 
 module.exports = app;
